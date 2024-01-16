@@ -35,8 +35,6 @@ public class MedicineManager {
     return medicine;
    
 }
-
-
     public void printListMedicines(List<Medicine> medicines) {
     System.out.println("----- List Medicines -----");
     for (int i = 0; i < medicines.size(); i++) {
@@ -86,6 +84,6 @@ public class MedicineManager {
     }
 
     System.out.println("Medicine edited successfully: " + medicineToEdit.toString());
-}
-
+    
+    }
 }
