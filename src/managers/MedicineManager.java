@@ -84,6 +84,6 @@ public class MedicineManager {
     }
 
     System.out.println("Medicine edited successfully: " + medicineToEdit.toString());
-    
+    printListMedicines(medicines);
     }
 }

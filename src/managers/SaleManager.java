@@ -148,7 +148,7 @@ public class SaleManager {
                 sales.get(i).getUnitsSold()
         );
     }
-}
+    }
     public void productSalesRating(List<Medicine> medicines, List<Sale> sales) {
         System.out.println("----- Product Sales Rating -----");
         medicineManager.printListMedicines(medicines);

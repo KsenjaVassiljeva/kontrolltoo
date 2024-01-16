@@ -45,9 +45,8 @@ public class App {
             System.out.println("5. Sell medicine");
             System.out.println("6. Print list sold medicines");
             System.out.println("7. Medicine rating");
-            System.out.println("8. Product sales rating");
-            System.out.println("9. Editing a medicine");
-            System.out.println("10. Editing a user");
+            System.out.println("8. Editing a medicine");
+            System.out.println("9. Editing a user");
             
             System.out.println("Invalid task number:");
             
@@ -84,12 +83,9 @@ public class App {
                     saleManager.medicineRating(this.sales);
                     break;
                 case 8:
-                    saleManager.productSalesRating(medicines, sales);
-                    break;
-                case 9:
                     medicineManager.editMedicine(medicines);
                     break;
-                case 10:
+                case 9:
                     customerManager.editCustomer(customers);
                     break;
                 default:

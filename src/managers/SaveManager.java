@@ -22,6 +22,7 @@ public class SaveManager {
     private final String MEDICINE_FILENAME = "medicines";
     private final String CUSTOMER_FILENAME = "customers";
     private final String SALES_FILENAME = "sales";
+    private Object customers;
 
     public List<Medicine> loadMedicines() {
         List<Medicine> medicines = new ArrayList<>();
@@ -73,21 +74,7 @@ public class SaveManager {
         }
         return customers;
     }
-
-    public void saveCustomers(List<Customer> customers) {
-        ObjectOutputStream oos;
-        FileOutputStream fos;
-        try {
-            fos = new FileOutputStream(CUSTOMER_FILENAME);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(customers);
-            oos.flush();
-        } catch (FileNotFoundException ex) {
-            System.out.printf("File \"%s\" not found!%n", CUSTOMER_FILENAME);
-        } catch (IOException ex) {
-            System.out.println("Error I/O!");
-        }
-    }
+        
 
     public List<Sale> loadSales() {
         List<Sale> sales = new ArrayList<>();
@@ -117,6 +104,21 @@ public class SaveManager {
             oos.flush();
         } catch (FileNotFoundException ex) {
             System.out.printf("File \"%s\" not found!%n", SALES_FILENAME);
+        } catch (IOException ex) {
+            System.out.println("Error I/O!");
+        }
+    }
+
+    public void saveCustomers(List<Customer> customers) {
+        ObjectOutputStream oos;
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(CUSTOMER_FILENAME);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(customers);
+            oos.flush();
+        } catch (FileNotFoundException ex) {
+            System.out.printf("File \"%s\" not found!%n", CUSTOMER_FILENAME);
         } catch (IOException ex) {
             System.out.println("Error I/O!");
         }
