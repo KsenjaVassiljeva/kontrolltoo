@@ -7,6 +7,10 @@ package managers;
 
 import entity.Customer;
 import entity.Medicine;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -81,4 +85,5 @@ public class CustomerManager {
 
         System.out.println("Customer updated!");
     }
+    
 }

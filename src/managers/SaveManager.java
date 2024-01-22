@@ -25,36 +25,31 @@ public class SaveManager {
     private Object customers;
 
     public List<Medicine> loadMedicines() {
-        List<Medicine> medicines = new ArrayList<>();
-        FileInputStream fis;
-        ObjectInputStream ois;
-        try {
-            fis = new FileInputStream(MEDICINE_FILENAME);
-            ois = new ObjectInputStream(fis);
-            medicines = (List<Medicine>) ois.readObject();
-        } catch (FileNotFoundException ex) {
-            System.out.printf("File \"%s\" not found!%n", MEDICINE_FILENAME);
-        } catch (IOException ex) {
-            System.out.println("Error I/O!");
-        } catch (ClassNotFoundException ex) {
-            System.out.printf("Class \"%s\" not found!%n", MEDICINE_FILENAME);
+    List<Medicine> medicines = new ArrayList<>();
+    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(MEDICINE_FILENAME))) {
+        medicines = (List<Medicine>) ois.readObject();
+    } catch (FileNotFoundException ex) {
+        System.out.printf("File \"%s\" not found!%n", MEDICINE_FILENAME);
+    } catch (IOException | ClassNotFoundException ex) {
+        System.out.println("Error reading medicines!");
+        logException(ex);
+    }
+    return medicines != null ? medicines : new ArrayList<>();
+    }
+    
+    public void saveMedicines(List<Medicine> medicines) {
+    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(MEDICINE_FILENAME))) {
+        oos.writeObject(medicines);
+        oos.flush();
+    } catch (IOException ex) {
+        System.out.println("Error saving medicines!");
+        logException(ex);
         }
-        return medicines;
     }
 
-    public void saveMedicines(List<Medicine> medicines) {
-        ObjectOutputStream oos;
-        FileOutputStream fos;
-        try {
-            fos = new FileOutputStream(MEDICINE_FILENAME);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(medicines);
-            oos.flush();
-        } catch (FileNotFoundException ex) {
-            System.out.printf("File \"%s\" not found!%n", MEDICINE_FILENAME);
-        } catch (IOException ex) {
-            System.out.println("Error I/O!");
-        }
+    private void logException(Exception ex) {
+        System.err.println("Exception details:");
+        ex.printStackTrace();
     }
 
     public List<Customer> loadCustomers() {
@@ -74,40 +69,6 @@ public class SaveManager {
         }
         return customers;
     }
-        
-
-    public List<Sale> loadSales() {
-        List<Sale> sales = new ArrayList<>();
-        FileInputStream fis;
-        ObjectInputStream ois;
-        try {
-            fis = new FileInputStream(SALES_FILENAME);
-            ois = new ObjectInputStream(fis);
-            sales = (List<Sale>) ois.readObject();
-        } catch (FileNotFoundException ex) {
-            System.out.printf("File \"%s\" not found!%n", SALES_FILENAME);
-        } catch (IOException ex) {
-            System.out.println("Error I/O!");
-        } catch (ClassNotFoundException ex) {
-            System.out.printf("Class \"%s\" not found!%n", SALES_FILENAME);
-        }
-        return sales;
-    }
-
-    public void saveSales(List<Sale> sales) {
-        ObjectOutputStream oos;
-        FileOutputStream fos;
-        try {
-            fos = new FileOutputStream(SALES_FILENAME);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(sales);
-            oos.flush();
-        } catch (FileNotFoundException ex) {
-            System.out.printf("File \"%s\" not found!%n", SALES_FILENAME);
-        } catch (IOException ex) {
-            System.out.println("Error I/O!");
-        }
-    }
 
     public void saveCustomers(List<Customer> customers) {
         ObjectOutputStream oos;
@@ -123,4 +84,26 @@ public class SaveManager {
             System.out.println("Error I/O!");
         }
     }
+        public List<Sale> loadSales() {
+    List<Sale> sales = new ArrayList<>();
+    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SALES_FILENAME))) {
+        sales = (List<Sale>) ois.readObject();
+    } catch (FileNotFoundException ex) {
+        System.out.printf("File \"%s\" not found!%n", SALES_FILENAME);
+    } catch (IOException | ClassNotFoundException ex) {
+        System.out.println("Error reading sales!");
+        ex.printStackTrace();
+    }
+    return sales;
+    }
+    public void saveSales(List<Sale> sales) {
+    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SALES_FILENAME))) {
+        oos.writeObject(sales);
+        oos.flush();
+    } catch (IOException ex) {
+        System.out.println("Error saving sales!");
+        ex.printStackTrace(); 
+    }
+    }
 }
+

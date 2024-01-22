@@ -21,7 +21,6 @@ public class Customer implements Serializable {
         this.firstname = firstName;
         this.lastname = lastName;
         this.phoneNumber = phoneNumber;
-        this.balance = balance;
     }
 
     public String getFirstname() {
