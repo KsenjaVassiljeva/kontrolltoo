@@ -47,7 +47,6 @@ public class App {
             System.out.println("7. Medicine rating");
             System.out.println("8. Editing a medicine");
             System.out.println("9. Editing a user");
-            System.out.println("10. Balance");
             
             System.out.println("Invalid task number:");
             
@@ -85,9 +84,11 @@ public class App {
                     break;
                 case 8:
                     medicineManager.editMedicine(medicines);
+                    saveManager.saveMedicines(medicines);
                     break;
                 case 9:
                     customerManager.editCustomer(customers);
+                    saveManager.saveCustomers(customers); // Обязательное чтобы сохранилось
                     break;
                 default:
                     System.out.println("Invalid task number.Please select from the list of tasks.");

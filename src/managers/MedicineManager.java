@@ -1,7 +1,6 @@
 package managers;
 
 import entity.Medicine;
-import entity.Manufacturer;
 import entity.Sale;
 import java.util.List;
 import java.util.Scanner;
@@ -28,9 +27,6 @@ public class MedicineManager {
     medicine.setPrice(InputProtection.doubleInput(0.01, Double.MAX_VALUE));
     System.out.print("Enter quantity: ");
     medicine.setQuantity(InputProtection.intInput(0, Integer.MAX_VALUE));
-    System.out.print("Enter manufacturer: ");
-    String manufacturerName = scanner.nextLine();
-    medicine.setManufacturer(new Manufacturer(manufacturerName));
     
     return medicine;
    
@@ -65,7 +61,7 @@ public class MedicineManager {
         medicineToEdit.setName(newName);
     }
 
-    System.out.print("Enter new price: ");
+    System.out.print("Enter new price(€): ");
     double newPrice = InputProtection.doubleInput(-1, Double.MAX_VALUE);
     if (newPrice >= 0) {
         medicineToEdit.setPrice(newPrice);
@@ -77,13 +73,15 @@ public class MedicineManager {
         medicineToEdit.setQuantity(newQuantity);
     }
 
-    System.out.print("Enter new manufacturer: ");
-    String newManufacturer = scanner.nextLine();
-    if (!newManufacturer.isEmpty()) {
-        medicineToEdit.setManufacturer(new Manufacturer(newManufacturer));
+    
+    System.out.println("Changes made. Do you want to save the changes? (Y/N): ");
+    String saveChoice = scanner.nextLine().toUpperCase();
+    
+    if (saveChoice.equals("Y")) {
+        System.out.println("Medicine edited successfully: " + medicineToEdit.toString());
+    } 
+    else {
+        System.out.println("Changes discarded. Medicine remains unchanged.");
     }
-
-    System.out.println("Medicine edited successfully: " + medicineToEdit.toString());
-    printListMedicines(medicines);
     }
 }

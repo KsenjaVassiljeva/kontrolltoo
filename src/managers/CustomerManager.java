@@ -57,33 +57,40 @@ public class CustomerManager {
 
         System.out.print("Enter the number of the customer to edit: ");
         int customerIndex = Integer.parseInt(scanner.nextLine()) - 1;
-
         if (customerIndex < 0 || customerIndex >= customers.size()) {
             System.out.println("Invalid customer selection.");
             return;
         }
 
-        Customer customer = customers.get(customerIndex);
+        Customer customerToEdit = customers.get(customerIndex);
 
-        System.out.print("New Firstname: ");
-        String newFirstname = scanner.nextLine().trim();
-        if (!newFirstname.isEmpty()) {
-            customer.setFirstname(newFirstname);
-        }
-
-        System.out.print("New Lastname: ");
-        String newLastname = scanner.nextLine().trim();
-        if (!newLastname.isEmpty()) {
-            customer.setLastname(newLastname);
-        }
-
-        System.out.print("New Phone: ");
-        String newPhone = scanner.nextLine().trim();
-        if (!newPhone.isEmpty()) {
-            customer.setPhoneNumber(newPhone);
-        }
-
-        System.out.println("Customer updated!");
+    System.out.print("Enter new Firstname: ");
+    String newFirstname = scanner.nextLine().trim();
+    if (!newFirstname.isEmpty()) {
+        customerToEdit.setFirstname(newFirstname);
     }
-    
+
+    System.out.print("Enter new Lastname: ");
+    String newLastname = scanner.nextLine().trim();
+    if (!newLastname.isEmpty()) {
+        customerToEdit.setLastname(newLastname);
+    }
+
+    System.out.print("Enter new Phone: ");
+    String newPhone = scanner.nextLine().trim();
+    if (!newPhone.isEmpty()) {
+        customerToEdit.setPhoneNumber(newPhone);
+    }
+
+    System.out.println("Changes made. Do you want to save the changes? (Y/N): ");
+    String saveChoice = scanner.nextLine().toUpperCase();
+
+    if (saveChoice.equals("Y")) {
+        System.out.println("Customer updated successfully: " + customerToEdit.toString());
+    } 
+    else {
+        System.out.println("Changes discarded. Customer remains unchanged.");
+        
+    }
+    }
 }

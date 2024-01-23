@@ -13,9 +13,9 @@ public class Medicine implements Serializable {
     private String name;
     private double price;
     private int quantity;
-    private Manufacturer manufacturer;
     private int stock;
     private Medicine medicine;
+    private double salesRating;
 
     public Medicine() {
     }
@@ -50,19 +50,11 @@ public class Medicine implements Serializable {
     public void setStock(int i) {
         this.stock = stock;
     }
+    
     public Medicine getMedicine() {
     return medicine;
     }
-
-    public Manufacturer getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(Manufacturer manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-    private double salesRating;
-
+    
     public double getSalesRating() {
         return salesRating;
     }
@@ -77,7 +69,6 @@ public class Medicine implements Serializable {
         hash = 37 * hash + Objects.hashCode(this.name);
         hash = 37 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
         hash = 37 * hash + this.quantity;
-        hash = 37 * hash + Objects.hashCode(this.manufacturer);
         return hash;
     }
 
@@ -92,8 +83,7 @@ public class Medicine implements Serializable {
         Medicine medicine = (Medicine) obj;
         return Double.compare(medicine.price, price) == 0
                 && quantity == medicine.quantity
-                && Objects.equals(name, medicine.name)
-                && Objects.equals(manufacturer, medicine.manufacturer);
+                && Objects.equals(name, medicine.name);
     }
 
     @Override
@@ -102,7 +92,6 @@ public class Medicine implements Serializable {
                 "name='" + name + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
-                ", manufacturer=" + manufacturer +
                 '}';
     }
 }
